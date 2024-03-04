@@ -23,6 +23,6 @@
 *.gch
 
 # Exec
-template
+stl
 .nfs*
 
