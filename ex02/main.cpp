@@ -1,38 +1,76 @@
-#include "Span.hpp"
+#include "MutantStack.hpp"
 
 int main()
 {
-	Span sp = Span(5);
-	sp.addNumber(6);
-	sp.addNumber(3);
-	sp.addNumber(17);
-	sp.addNumber(9);
-	sp.addNumber(11);
-	std::cout << sp.shortestSpan() << std::endl;
-	std::cout << sp.longestSpan() << std::endl;
+	std::cout << GREEN << "Subject's main" << RESET << std::endl;
+	MutantStack<int> mstack;
+	mstack.push(5);
+	mstack.push(17);
+	std::cout << mstack.top() << std::endl;
+	mstack.pop();
+	std::cout << mstack.size() << std::endl;
+	mstack.push(3);
+	mstack.push(5);
+	mstack.push(737);
+	mstack.push(0);
+	MutantStack<int>::iterator it = mstack.begin();
+	MutantStack<int>::iterator ite = mstack.end();
+	++it;
+	--it;
+	while (it != ite)
+	{
+	std::cout << *it << std::endl;
+	++it;
+	}
+	std::stack<int> s(mstack);
 
-	Span sp1(4);
-	int numbers[] = {6, 3, 17, 9, 11};
-	// converting an array to a vector
-	std::vector<int> nbToAdd(numbers, numbers + sizeof(numbers) / sizeof(int));
-	try
-	{
-		sp1.addNumber(nbToAdd.begin(), nbToAdd.end());
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << std::endl;
-	}
+	std::cout << std::endl;
 
-	Span sp2(std::numeric_limits<int>::max());
-	try
+	std::cout << CYAN << "My main - MutantStack with list " << RESET << std::endl;
+	MutantStack<int, std::list<int> > mlist;
+	mlist.push(5);
+	mlist.push(17);
+	std::cout << mlist.top() << std::endl;
+	mlist.pop();
+	std::cout << mlist.size() << std::endl;
+	mlist.push(3);
+	mlist.push(5);
+	mlist.push(737);
+	mlist.push(0);
+	MutantStack<int, std::list<int> >::iterator it2 = mlist.begin();
+	MutantStack<int, std::list<int> >::iterator ite2 = mlist.end();
+	++it2;
+	--it2;
+	while (it2 != ite2)
 	{
-		sp2.addNumber(nbToAdd.begin(), nbToAdd.end());
-		std::cout << sp2.shortestSpan() << std::endl;
-		std::cout << sp2.longestSpan() << std::endl;
+		std::cout << *it2 << std::endl;
+		++it2;
 	}
-	catch(const std::exception& e)
+	MutantStack<int, std::list<int> > s2(mlist);
+
+	std::cout << std::endl;
+
+	std::cout << MAGENTA << "My main - list " << RESET << std::endl;
+	std::list<int> mlist2;
+	mlist2.push_back(5);
+	mlist2.push_back(17);
+	std::cout << mlist2.back() << std::endl;
+	mlist2.pop_back();
+	std::cout << mlist2.size() << std::endl;
+	mlist2.push_back(3);
+	mlist2.push_back(5);
+	mlist2.push_back(737);
+	mlist2.push_back(0);
+	std::list<int>::iterator it3 = mlist2.begin();
+	std::list<int>::iterator ite3 = mlist2.end();
+	++it3;
+	--it3;
+	while (it3 != ite3)
 	{
-		std::cerr << e.what() << std::endl;
+		std::cout << *it3 << std::endl;
+		++it3;
 	}
+	std::list<int> s3(mlist2);
+
+	return 0;
 }

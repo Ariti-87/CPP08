@@ -14,21 +14,49 @@
 #define RESET "\033[0m"
 
 #include <iostream>
+#include <stack>
+#include <vector>
+#include <algorithm>
+#include <list>
 
-class MutantStack
+/*
+ * MutantStack is a custom stack implementation that extends the functionality
+ * of std::stack to include iterator access to the underlying container.
+ * It allows for more flexible manipulation of stack elements.
+ *
+ * T: The type of elements stored in the stack.
+ * Container: The underlying container type, defaulting to std::deque<T>.
+ */
+template <typename T, typename Container = std::deque< T > >
+class MutantStack : public std::stack< T, Container >
 {
 	public:
-		MutantStack();
-		MutantStack(MutantStack const& src);
-		~MutantStack();
-		MutantStack &operator=(MutantStack const& src);
+		MutantStack() {};
+		MutantStack(MutantStack & src) : std::stack< T, Container >(src) {}
+		~MutantStack() {}
+		MutantStack & operator=(MutantStack & src)
+		{
+			if (this != &src)
+				std::stack< T, Container >::operator=(src);
+			return (*this);
+		}
+		typedef typename Container::iterator iterator;
+		typedef typename Container::const_iterator const_iterator;
+		typedef typename Container::reverse_iterator reverse_iterator;
+		typedef typename Container::const_reverse_iterator const_reverse_iterator;
 
-	private:
-		// Ajoutez  ici les membres de données
+		iterator begin() { return (this->c.begin()); }
+		iterator end() { return (this->c.end()); }
 
+		const_iterator begin() const { return (this->c.begin()); }
+		const_iterator end() const { return (this->c.end()); }
+
+		reverse_iterator rbegin() { return (this->c.rbegin()); };
+		reverse_iterator  rend() { return (this->c.rend()); };
+
+		const_reverse_iterator rbegin() const { return (this->c.rbegin()); };
+		const_reverse_iterator rend() const { return (this->c.rend()); };
 };
-
-std::ostream &operator<<(std::ostream &o, MutantStack const& src);
 
 #endif
 

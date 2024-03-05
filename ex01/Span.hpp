@@ -30,8 +30,8 @@ class Span
 
 		void addNumber(int nb);
 
-		template<typename I>
-		void addNumber(I first, I last);
+		template<typename T>
+		void addNumber(typename T::iterator first, typename T::iterator last);
 
 		int shortestSpan() const;
 		int longestSpan() const;
@@ -57,8 +57,8 @@ class Span
 		Span();
 };
 
-template<typename I>
-void Span::addNumber(I first, I last)
+template<typename T>
+void Span::addNumber(typename T::iterator first, typename T::iterator last)
 {
 	if (std::distance(first, last) + _numbers.size() > _sizeMax)
 		throw (SpanFullException());

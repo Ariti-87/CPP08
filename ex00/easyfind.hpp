@@ -24,6 +24,7 @@ class NotFoundException : public std::exception
 		virtual const char *what() const throw() { return("Value not found in container"); };
 };
 
+// Return the first occurrence of the second parameter in the first parameter.
 template<typename T>
 typename T::const_iterator easyfind(T const& container, int const& value)
 {

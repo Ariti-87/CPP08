@@ -17,7 +17,7 @@ int main()
 	std::vector<int> nbToAdd(numbers, numbers + sizeof(numbers) / sizeof(int));
 	try
 	{
-		sp1.addNumber(nbToAdd.begin(), nbToAdd.end());
+		sp1.addNumber< std::vector<int> >(nbToAdd.begin(), nbToAdd.end());
 	}
 	catch(const std::exception& e)
 	{
@@ -27,7 +27,7 @@ int main()
 	Span sp2(std::numeric_limits<int>::max());
 	try
 	{
-		sp2.addNumber(nbToAdd.begin(), nbToAdd.end());
+		sp2.addNumber< std::vector<int> >(nbToAdd.begin(), nbToAdd.end());
 		std::cout << sp2.shortestSpan() << std::endl;
 		std::cout << sp2.longestSpan() << std::endl;
 	}

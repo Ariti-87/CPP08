@@ -66,4 +66,3 @@ const char *Span::SpanCalculException::what() const throw()
 {
 	return ("Not enough numbers to calculate span");
 }
-
