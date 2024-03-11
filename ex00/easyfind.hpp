@@ -24,7 +24,14 @@ class NotFoundException : public std::exception
 		virtual const char *what() const throw() { return("Value not found in container"); };
 };
 
-// Return the first occurrence of the second parameter in the first parameter.
+/*
+@brief Searches for the first occurrence of a specified value in a container.
+@tparam T The type of the container. Must be a container type that supports `begin()` and `end()` methods.
+@param container The container in which to search for the value.
+@param value The value to search for in the container.
+@return An iterator pointing to the first occurrence of the value in the container.
+@throws NotFoundException If the value is not found in the container.
+*/
 template<typename T>
 typename T::const_iterator easyfind(T const& container, int const& value)
 {
